@@ -1,6 +1,8 @@
 package com.thonecardoso.springmongo.resources;
 
 import com.thonecardoso.springmongo.domain.User;
+import com.thonecardoso.springmongo.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +12,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@AllArgsConstructor
 public class UserResource {
+
+    private final UserService service;
     @GetMapping
     public ResponseEntity<List<User>> findAll(){
-        var u1 = new User("1", "maria", "maria@gmail.com");
-        var u2 = new User("2", "jose", "jose@gmail.com");
-
-        return ResponseEntity.ok().body(List.of(u1, u2));
+        var users = service.findAll();
+        return ResponseEntity.ok().body(users);
     }
 }
