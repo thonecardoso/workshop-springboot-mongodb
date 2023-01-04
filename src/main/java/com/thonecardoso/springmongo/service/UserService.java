@@ -15,4 +15,12 @@ public class UserService {
     public List<User> findAll(){
         return repository.findAll();
     }
+
+    public User save(User user){
+        return repository.save(user);
+    }
+
+    public User findById(String id) {
+        return repository.findById(id).orElseThrow();
+    }
 }
