@@ -2,6 +2,7 @@ package com.thonecardoso.springmongo.service;
 
 import com.thonecardoso.springmongo.domain.User;
 import com.thonecardoso.springmongo.repository.UserRepository;
+import com.thonecardoso.springmongo.service.exception.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,6 @@ public class UserService {
     }
 
     public User findById(String id) {
-        return repository.findById(id).orElseThrow();
+        return repository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Object not found"));
     }
 }
