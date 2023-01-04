@@ -29,4 +29,11 @@ public class UserService {
         var user = findById(id);
         repository.delete(user);
     }
+
+    public User update(String id, User userToUpdate) {
+        var user = findById(id);
+        user.setEmail(userToUpdate.getEmail());
+        user.setName(userToUpdate.getName());
+        return  repository.save(user);
+    }
 }

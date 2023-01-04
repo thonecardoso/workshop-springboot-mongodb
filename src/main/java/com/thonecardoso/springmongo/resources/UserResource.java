@@ -39,6 +39,17 @@ public class UserResource {
         return ResponseEntity.created(url).body(new UserDto(user));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable String id, @RequestBody UserDto userDto){
+        var user = new User(userDto.getId(), userDto.getName(), userDto.getEmail());
+        user = service.update(id, user);
+        var url = ServletUriComponentsBuilder
+                .fromCurrentRequest().path("/{id}")
+                .buildAndExpand(user.getId())
+                .toUri();
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable String id){
         service.deleteById(id);
