@@ -1,13 +1,13 @@
 package com.thonecardoso.springmongo.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +20,8 @@ public class User implements Serializable {
     private String name;
     @EqualsAndHashCode.Exclude
     private String email;
+
+    @DBRef(lazy = true)
+    @Setter(AccessLevel.NONE)
+    private final List<Post> posts = new ArrayList<>();
 }
