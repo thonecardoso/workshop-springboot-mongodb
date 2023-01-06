@@ -1,6 +1,7 @@
 package com.thonecardoso.springmongo.domain;
 
 import com.thonecardoso.springmongo.dto.AuthorDto;
+import com.thonecardoso.springmongo.dto.CommentDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,13 +10,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Document
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Post implements Serializable {
 
     @Id
@@ -24,6 +23,66 @@ public class Post implements Serializable {
     private String title;
     private String body;
     private AuthorDto author;
+    private List<CommentDto> comments = new ArrayList<>();
+
+    public Post() {
+    }
+
+    public Post(String id, Date date, String title, String body, AuthorDto author) {
+        this.id = id;
+        this.date = date;
+        this.title = title;
+        this.body = body;
+        this.author = author;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public AuthorDto getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(AuthorDto author) {
+        this.author = author;
+    }
+
+    public List<CommentDto> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDto> comments) {
+        this.comments = comments;
+    }
 
     @Override
     public boolean equals(Object o) {
