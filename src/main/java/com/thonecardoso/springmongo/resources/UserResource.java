@@ -1,5 +1,6 @@
 package com.thonecardoso.springmongo.resources;
 
+import com.thonecardoso.springmongo.domain.Post;
 import com.thonecardoso.springmongo.domain.User;
 import com.thonecardoso.springmongo.dto.UserDto;
 import com.thonecardoso.springmongo.service.UserService;
@@ -54,5 +55,11 @@ public class UserResource {
     public ResponseEntity<Void> deleteById(@PathVariable String id){
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findAllUserPosts(@PathVariable String id){
+        var user = service.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 }
